@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Sets the character encoding for the document -->
+    <meta charset="UTF-8">
+    <!-- Configures the viewport for responsive design across devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sets the title that appears in the browser tab -->
+    <title>Air Catcher BookStore</title>
+    <!-- Loads Tailwind CSS for modern, utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Applies the 'Inter' font globally and sets a fallback */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex flex-col text-gray-800">
+    <!-- Header section of the bookstore, styled with Tailwind for a clean, prominent look -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 shadow-lg rounded-b-xl">
+        <div class="container mx-auto text-center">
+            <!-- Main heading for the bookstore -->
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Welcome to the Air Catcher BookStore</h1>
+        </div>
+    </header>
+
+    <!-- Main content area of the page -->
+    <main class="container mx-auto p-4 flex-grow">
+        <!-- Section displaying the list of available audio books -->
+        <section id="book-list" class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-blue-200">
+            <!-- Heading for the audio books section -->
+            <h2 class="text-3xl font-bold mb-6 text-center text-blue-700 border-b-2 border-blue-300 pb-3">Available Audio Books</h2>
+            
+            <!-- Unordered list where individual book items will be dynamically inserted by JavaScript -->
+            <ul id="book-items-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Book items will be injected here by JavaScript -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer section of the page -->
+    <footer class="bg-gray-800 text-white p-4 text-center mt-8 rounded-t-xl shadow-inner">
+        <!-- Copyright information -->
+        <p class="text-sm">&copy; 2025 EJ AiBooks.</p>
+    </footer>
+
+    <!-- JavaScript to dynamically generate the book list -->
+    <script>
+        // Array of book objects, each containing title, author, and audio path
+        const books = [
+            { title: "Lilly and the Willow Tree", author: "EJ AiBooks w/ Gemini", audioPath: "Lily and the Willow Tree_audio.mp3" },
+            { title: "Leo the Lion", author: "EJ AiBooks w/ Gemini", audioPath: "Leo the Lion Cub_audio.mp3" },
+            { title: "Flicker the Firefly", author: "EJ AiBooks w/ Gemini", audioPath: "Flicker the Firefly_audio.mp3" },
+            { title: "Barnaby Bear", author: "EJ AiBooks w/ Gemini", audioPath: "Barnaby Bear_audio.mp3" },
+            { title: "Little Nimbus", author: "EJ AiBooks w/ Gemini", audioPath: "Little Nimbus_audio.mp3" }
+        ];
+
+        // Get the container element where book items will be added
+        const bookItemsContainer = document.getElementById('book-items-container');
+
+        // Loop through each book in the 'books' array
+        books.forEach(book => {
+            // Create a new list item element (<li>) for each book
+            const listItem = document.createElement('li');
+            // Apply Tailwind CSS classes for styling the list item
+            listItem.className = 'bg-gray-50 p-5 rounded-xl shadow-md border border-gray-200 transform transition-transform hover:scale-105 hover:shadow-lg duration-300 ease-in-out flex flex-col justify-between';
+
+            // Set the inner HTML of the list item using template literals
+            // This includes the book title, author, and a "Listen Now" anchor tag
+            listItem.innerHTML = `
+                <div>
+                    <!-- Book title -->
+                    <h3 class="text-2xl font-semibold text-indigo-800 mb-2">${book.title}</h3>
+                    <!-- Book author -->
+                    <p class="text-lg text-gray-600 mb-4">Author: ${book.author}</p>
+                </div>
+                <!-- Anchor tag for listening to the audio book. The href will be updated later. -->
+                <a href="${book.audioPath}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md text-center transition-colors duration-200">
+                    Listen Now
+                </a>
+            `;
+
+            // Append the newly created list item to the book items container
+            bookItemsContainer.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
+
